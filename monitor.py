@@ -34,7 +34,7 @@ NOTE_API = "https://openapi.biji.com/open/api/v1/resource/note/list?cursor=0"
 # 端口按 port_map.json 取，账号按 runtime 目录自动发现——加第三个微信不用改代码
 PORT_MAP = Path(""<你的本地路径>"")
 ACC_FILE = BASE / "data/accounts.json"
-_WX_FALLBACK = {"wxid_xurchv26a0r822_4765": 5678, "wxid_vvzb7s8u7yro12_ca93": 5679}
+_WX_FALLBACK = {"wxid_account_a": 5678, "wxid_account_b": 5679}
 
 
 def disabled_accounts() -> set:
@@ -73,7 +73,7 @@ MID_WORDS = ["合同", "回款", "报价", "定金", "预算", "老板", "签约
 MAX_PER_SCAN = 8
 
 # 群消息必须点名我，才算"要我处理"；否则是群友互相说话
-ME_WORDS = ("庞总", "庞老师", "恩浩", "庞恩浩", "庞恩民", "@庞", "庞工")
+ME_WORDS = tuple(os.environ.get("ME_WORDS", "老板,老师,我").split(","))
 
 
 def addressed_to_me(chat: str, text: str, rule: dict | None) -> bool:
